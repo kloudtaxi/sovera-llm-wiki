@@ -1,23 +1,57 @@
-export default function Page() {
+import { AppShell } from '@/components/shell/app-shell'
+import { SetMode } from '@/components/mode/set-mode'
+import { AskEntry } from '@/components/home/ask-entry'
+import { ProjectCard } from '@/components/home/project-card'
+import { ActivityItem } from '@/components/home/activity-item'
+import { PROJECTS, ACTIVITY } from '@/lib/mock-data'
+
+export default function HomePage() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-[color:light-dark(#fff,#000)] text-[color:light-dark(#000,#fff)]">
-      <svg
-        aria-hidden="true"
-        className="size-20"
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p className="absolute left-1/2 top-[calc(50%+56px)] -translate-x-1/2 whitespace-nowrap text-sm font-medium text-muted-foreground">
-        Your v0 generation will show here.
-      </p>
-    </main>
+    <AppShell crumbs={[{ label: 'Workspace' }]}>
+      <SetMode mode="create" />
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-10">
+        <header className="mb-8">
+          <p className="text-sm text-muted-foreground">Good afternoon, Jordan.</p>
+          <h1 className="mt-1 text-balance font-serif text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
+            Your knowledge has grown since you last looked.
+          </h1>
+          <p className="mt-2 max-w-2xl text-pretty leading-relaxed text-muted-foreground">
+            Three active projects, 49 pages, and every claim traceable to a source you added.
+          </p>
+        </header>
+
+        <AskEntry />
+
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_20rem]">
+          {/* Projects */}
+          <section>
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="font-serif text-xl font-semibold text-foreground">Active projects</h2>
+              <span className="text-xs text-muted-foreground">Sorted by recent activity</span>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {PROJECTS.map((p) => (
+                <ProjectCard key={p.id} project={p} />
+              ))}
+            </div>
+          </section>
+
+          {/* Activity */}
+          <section>
+            <h2 className="mb-3 font-serif text-xl font-semibold text-foreground">Recent activity</h2>
+            <div className="rounded-xl border border-border bg-surface px-4 py-1">
+              <ul className="divide-y divide-border">
+                {ACTIVITY.map((entry) => (
+                  <ActivityItem key={entry.id} entry={entry} />
+                ))}
+              </ul>
+            </div>
+            <p className="mt-2 px-1 text-[11px] text-muted-foreground">
+              An append-only log. Nothing changes without your say-so.
+            </p>
+          </section>
+        </div>
+      </div>
+    </AppShell>
   )
 }
