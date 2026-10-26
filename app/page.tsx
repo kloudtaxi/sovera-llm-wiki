@@ -1,9 +1,9 @@
 import { AppShell } from '@/components/shell/app-shell'
 import { SetMode } from '@/components/mode/set-mode'
 import { AskEntry } from '@/components/home/ask-entry'
-import { ProjectCard } from '@/components/home/project-card'
+import { ProjectTrack } from '@/components/home/project-track'
 import { ActivityItem } from '@/components/home/activity-item'
-import { PROJECTS, ACTIVITY } from '@/lib/mock-data'
+import { ACTIVITY } from '@/lib/mock-data'
 
 export default function HomePage() {
   return (
@@ -25,15 +25,11 @@ export default function HomePage() {
         <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_20rem]">
           {/* Projects */}
           <section>
-            <div className="mb-3 flex items-center justify-between">
-              <h2 className="font-serif text-xl font-semibold text-foreground">Active projects</h2>
-              <span className="text-xs text-muted-foreground">Sorted by recent activity</span>
+            <div className="mb-3 flex items-baseline justify-between gap-3">
+              <h2 className="font-serif text-xl font-semibold text-foreground">Where things stand</h2>
+              <span className="text-xs text-muted-foreground">Create → Deliver</span>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {PROJECTS.map((p) => (
-                <ProjectCard key={p.id} project={p} />
-              ))}
-            </div>
+            <ProjectTrack />
           </section>
 
           {/* Activity */}
