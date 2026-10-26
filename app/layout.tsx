@@ -1,21 +1,20 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Fraunces } from 'next/font/google'
+import { Inter, Manrope } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import { ModeProvider } from '@/components/mode/mode-provider'
 import './globals.css'
 
-const geist = Geist({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-geist',
+  variable: '--font-inter',
   display: 'swap',
 })
 
-const fraunces = Fraunces({
+const manrope = Manrope({
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-manrope',
   display: 'swap',
-  axes: ['opsz'],
 })
 
 export const metadata: Metadata = {
@@ -32,8 +31,8 @@ export const viewport: Viewport = {
   maximumScale: 1,
   colorScheme: 'light dark',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f7f4ee' },
-    { media: '(prefers-color-scheme: dark)', color: '#14140f' },
+    { media: '(prefers-color-scheme: light)', color: '#f7f8fa' },
+    { media: '(prefers-color-scheme: dark)', color: '#111318' },
   ],
 }
 
@@ -44,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="bg-background">
-      <body className={`${geist.variable} ${fraunces.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${manrope.variable} font-sans antialiased`}>
         <ThemeProvider>
           <ModeProvider>{children}</ModeProvider>
         </ThemeProvider>
